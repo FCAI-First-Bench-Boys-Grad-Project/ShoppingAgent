@@ -1,16 +1,7 @@
 [project]
-name = "first-agent-template"
+name = "shopping-agent"
 version = "0.1.0"
-description = "Add your description here"
+description = "Shopping agent to automate your shopping!"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = [
-    "duckduckgo-search>=8.0.2",
-    "google-generativeai>=0.8.5",
-    "gradio>=5.33.0",
-    "markdownify>=1.1.0",
-    "pandas>=2.3.0",
-    "pytz>=2025.2",
-    "requests>=2.32.3",
-    "smolagents==1.13.0",
-]
+dependencies = []
