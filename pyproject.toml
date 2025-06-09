@@ -4,4 +4,8 @@ version = "0.1.0"
 description = "Shopping agent to automate your shopping!"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "llama-index-core>=0.12.41",
+    "llama-index-llms-gemini>=0.5.0",
+    "python-dotenv>=1.1.0",
+]
