@@ -93,7 +93,7 @@ prompt_to_generate_prompts: |-
   - Buying a multi-part system such as off-grid solar & battery system.
   - Buying a multi-part request such as an outfit.
   
-  Our Architecture consists of 4 Agents as follows:
+  Our Architecture consists of 5 Agents as follows:
   Manager Agent (root agent):
   - Chats with user
   - Should do what he sees fit to recommend products to the user, can delegate tasks to all other agents
@@ -152,7 +152,7 @@ prompt_to_generate_prompts: |-
 
   Product Investigator Agent
 
-  Lazy Agent
+  trivial_search agent
 
   Input: Query (from manager), should include a product, price range, specific requests, geographic location (optional)
 

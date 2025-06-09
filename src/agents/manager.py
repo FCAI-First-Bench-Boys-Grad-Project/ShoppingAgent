@@ -1,17 +1,8 @@
-from llama_index.core.agent.workflow import AgentWorkflow, ReActAgent, FunctionAgent
-
-from llms.gemini_2_flash import create_gemini
-
-
-llm = create_gemini()
-
-# TODO: Impelment
-manager_agent = ReActAgent(
-    name="manager_agent",
-    description="",
-    system_prompt="",
-    tools=[],
-    llm=llm,
-)
-
-
+class ManagerIdentity():
+    def __init__(self):
+        name="manager_agent"
+        description="The Main Agent Responsible of Fulfilling the user's request in the task of automated shopping."
+        system_prompt=\
+        '''
+        '''
+        tools=[]
