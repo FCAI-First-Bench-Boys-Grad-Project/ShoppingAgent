@@ -1,4 +1,5 @@
 import re
+import time
 import requests
 import markdownify
 from typing import Any, Optional
@@ -15,6 +16,10 @@ def visit_webpage(url: str) -> str:
         str: The webpage content converted to markdown.
     """
     try:
+
+        # Sleep for 1 second to avoid overwhelming the server
+        time.sleep(3)
+
         # Send a GET request to the URL with a 20-second timeout
         response = requests.get(url, timeout=20)
         response.raise_for_status()  # Raise an exception for bad status codes
