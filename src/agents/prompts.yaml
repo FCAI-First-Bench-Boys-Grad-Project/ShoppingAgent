@@ -191,6 +191,7 @@ product_hunter_agent:
     - Vendors searched: [List]
     - Products excluded: [Brief reason why others were excluded]
     - Confidence level: [High/Medium/Low based on thorough verification]
+    YOU MUST RETURN URLs, unless you didn't found any results (RARE cases).
 
 trivial_search_agent:
   name: "trivial_search_agent"
