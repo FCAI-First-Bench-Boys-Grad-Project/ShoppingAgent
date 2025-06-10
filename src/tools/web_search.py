@@ -3,9 +3,6 @@ from typing import Any, Optional
 from llama_index.core.tools import FunctionTool
 from llama_index.tools.duckduckgo import DuckDuckGoSearchToolSpec
 
-# print([tool for tool in search_tool])
-
-
 def duck_search_tool(query: str) -> str:
     """
     search for a specific query on internet.

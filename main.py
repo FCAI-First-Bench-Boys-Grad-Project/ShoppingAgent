@@ -2,6 +2,7 @@
 import yaml
 import asyncio
 from datetime import datetime
+from dotenv import load_dotenv
 from llama_index.core.workflow import Context
 from src.llms.gemini_2_flash import create_gemini
 from llama_index.core.agent.workflow import AgentWorkflow, ReActAgent, FunctionAgent
@@ -9,12 +10,11 @@ from llama_index.core.callbacks import CallbackManager, LlamaDebugHandler
 from llama_index.core.tools import QueryEngineTool
 from llama_index.core.agent.workflow import AgentWorkflow, ToolCallResult, AgentStream
 
-
 # Custom imports
 from src.tools.web_search import search_tool
 from src.tools.visit_webpage import visit_webpage
 from src.tools.query_on_url import Get_info_from_url_tool
-from dotenv import load_dotenv
+
 import os
 
 # Load environment variables
@@ -182,7 +182,7 @@ async def main():
     # prompt = "I am having a wedding next week, i want to buy a wedding dress for my wife, i want it to be white and elegant, i want it to be around 10 EGP, can you please give me the links of the dresses that fit this description ?"
     # prompt = "I want to buy a wedding suit with tie and everything with a maximum budget of 30k EGP in Cairo."
 
-    prompt = "I want a good  wired headset for gaming in range of 1000EGP."
+    prompt = "I want a good wired headset for gaming in range of 1000EGP."
 
     print(f"\n🎯 Starting Shopping Assistant Workflow")
     print(f"📝 Query: {prompt}")
