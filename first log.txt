@@ -94,3 +94,85 @@ Based on the search results and the visited websites, here are a few wired gamin
 
 I recommend checking the specifications and reviews of each model to ensure it meets your specific gaming needs in terms of sound quality, microphone clarity, and comfort. Also, keep in mind that prices may vary depending on the retailer and any ongoing promotions.
 ============================================================
+
+Manager
+Tools
+You have access to the following tools:
+
+Tool Name: handoff Tool Description: Useful for handing off to another agent. If you are currently not equipped to handle the user's request, or another agent is better suited to handle the request, please hand off to the appropriate agent.
+
+Currently available agents: {'shopping_researcher_agent': 'This Agent is responsible of providing context for the manager agent about the systems or products requested by the user.', 'product_hunter_agent': 'This agent is responsible of returning top products URLs matching the requirements with a brief description of the product of each URL.', 'product_investigator_agent': 'The agent is responsible of getting information about any product.', 'trivial_search_agent': "This agent is Responsible of fulfilling the user's request in the task of automated shopping."}
+
+Tool Args: {"properties": {"to_agent": {"title": "To Agent", "type": "string"}, "reason": {"title": "Reason", "type": "string"}}, "required": ["to_agent", "reason"], "type": "object"}
+
+Output Format
+Please answer in the same language as the question and use the following format:
+
+Thought: The current language of the user is: (user's language). I need to use a tool to help me answer the question.
+Action: tool name (one of handoff) if using a tool.
+Action Input: the input to the tool, in a JSON format representing the kwargs (e.g. {"input": "hello world", "num_beams": 5})
+Please ALWAYS start with a Thought.
+
+NEVER surround your response with markdown code markers. You may use code markers within your response if you need to.
+
+Please use a valid JSON format for the Action Input. Do NOT do this {'input': 'hello world', 'num_beams': 5}. If you include the "Action:" line, then you MUST include the "Action Input:" line too, even if the tool does not need kwargs, in that case you MUST use "Action Input: {}".
+
+If this format is used, the tool will respond in the following format:
+
+Observation: tool response
+You should keep repeating the above format till you have enough information to answer the question without using any more tools. At that point, you MUST respond in one of the following two formats:
+
+Thought: I can answer without using any more tools. I'll use the user's language to answer
+Answer: [your answer here (In the same language as the user's question)]
+Thought: I cannot answer the question with the provided tools.
+Answer: [your answer here (In the same language as the user's question)]
+Current Conversation
+Below is the current conversation consisting of interleaving human and assistant messages.
+------------------------------------------------------------------------------
+
+Any thing else  
+
+Tools
+
+Tool Name: duckduckgo_full_search Tool Description: Make a query to DuckDuckGo search to receive a full search results. Tool Args: {"properties": {"query": {"title": "Query", "type": "string"}}, "required": ["query"], "type": "object"}
+
+Tool Name: visit_webpage Tool Description: visit_webpage(url: str) -> str
+
+Visits a webpage at the given url and reads its content as a markdown string.
+
+Args:
+    url (str): The url of the webpage to visit.
+
+Returns:
+    str: The webpage content converted to markdown.
+Tool Args: {"properties": {"url": {"title": "Url", "type": "string"}}, "required": ["url"], "type": "object"}
+
+Tool Name: Get_info_from_url Tool Description: Given a product's URL, it returns a JSON object that contains all the important attributes about a product. Tool Args: {"properties": {"url": {"title": "Url", "type": "string"}}, "required": ["url"], "type": "object"}
+
+Tool Name: handoff Tool Description: Useful for handing off to another agent. If you are currently not equipped to handle the user's request, or another agent is better suited to handle the request, please hand off to the appropriate agent.
+
+Currently available agents: {'manager_agent': "The Main Agent Responsible of Fulfilling the user's request in the task of automated shopping.", 'shopping_researcher_agent': 'This Agent is responsible of providing context for the manager agent about the systems or products requested by the user.', 'product_investigator_agent': 'The agent is responsible of getting information about any product.', 'trivial_search_agent': "This agent is Responsible of fulfilling the user's request in the task of automated shopping."}
+
+Tool Args: {"properties": {"to_agent": {"title": "To Agent", "type": "string"}, "reason": {"title": "Reason", "type": "string"}}, "required": ["to_agent", "reason"], "type": "object"}
+---------------------------------------------------------------------------------------------------------
+Output Format
+Please answer in the same language as the question and use the following format:
+
+Thought: The current language of the user is: (user's language). I need to use a tool to help me answer the question.
+Action: tool name (one of duckduckgo_full_search, visit_webpage, Get_info_from_url, handoff) if using a tool.
+Action Input: the input to the tool, in a JSON format representing the kwargs (e.g. {"input": "hello world", "num_beams": 5})
+Please ALWAYS start with a Thought.
+
+NEVER surround your response with markdown code markers. You may use code markers within your response if you need to.
+
+Please use a valid JSON format for the Action Input. Do NOT do this {'input': 'hello world', 'num_beams': 5}. If you include the "Action:" line, then you MUST include the "Action Input:" line too, even if the tool does not need kwargs, in that case you MUST use "Action Input: {}".
+
+If this format is used, the tool will respond in the following format:
+
+Observation: tool response
+You should keep repeating the above format till you have enough information to answer the question without using any more tools. At that point, you MUST respond in one of the following two formats:
+
+Thought: I can answer without using any more tools. I'll use the user's language to answer
+Answer: [your answer here (In the same language as the user's question)]
+Thought: I cannot answer the question with the provided tools.
+Answer: [your answer here (In the same language as the user's question)]

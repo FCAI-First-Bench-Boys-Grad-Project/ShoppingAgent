@@ -5,10 +5,14 @@ description = "Shopping agent to automate your shopping!"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "arize-phoenix>=10.10.0",
+    "gradio-client>=1.10.3",
     "llama-index>=0.12.41",
     "llama-index-core>=0.12.41",
     "llama-index-llms-gemini>=0.5.0",
     "llama-index-tools-duckduckgo>=0.3.0",
+    "llama-index-utils-workflow>=0.3.2",
     "markdownify>=1.1.0",
+    "openinference-instrumentation-llama-index>=4.3.0",
     "python-dotenv>=1.1.0",
 ]
