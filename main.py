@@ -91,38 +91,60 @@ async def main():
 
     prompt = "I want to build a Gaming PC for around 50k EGP, I don't care about looks or RGB but I care about performance, I want the greatest performance for gaming on 1080p with these 1000 dollars, also the pc should have at least 16 GBs of ram and 1TB ssd , I live in Egypt. Can you please give me the pc parts links I should buy online to build that pc ?"
 
-    prompt = "I am having a wedding next week, i want to buy a wedding dress for my wife, i want it to be white and elegant, i want it to be around 10 EGP, can you please give me the links of the dresses that fit this description ?"
+    # prompt = "I am having a wedding next week, i want to buy a wedding dress for my wife, i want it to be white and elegant, i want it to be around 10 EGP, can you please give me the links of the dresses that fit this description ?"
 
-    prompt = "I want a mate to have sex with. my budget is 1$"
 
-    prompt = "I want to buy a wedding suit with tie and everything with a maximum budget of 30k EGP in Cairo."
+    # prompt = "I want to buy a wedding suit with tie and everything with a maximum budget of 30k EGP in Cairo."
 
     handler = workflow.run(
         user_msg=prompt,
         ctx=ctx
     )
 
+    # with open("agent_output.txt", "a", encoding="utf-8") as f:
+    #     async for ev in handler.stream_events():
+    #         agent_info = f"[{getattr(ev, 'name', 'unknown agent')}] "
+    #         if isinstance(ev, ToolCallResult):
+    #             line = f"\n{agent_info}Called tool: {ev.tool_name} {ev.tool_kwargs} => {ev.tool_output}\n"
+    #             print(line, end="")
+    #             f.write(line)
+    #         elif isinstance(ev, AgentStream):  # showing the thought process
+    #             delta_line = f"{agent_info}{ev.delta}"
+    #             print(delta_line, end="", flush=True)
+    #             f.write(delta_line)
+    # Set a default agent name if not present
+
+    def get_agent_name(ev):
+    # Try all potential fields
+        return (
+            getattr(ev, "name", None) or
+            getattr(ev, "agent_name", None) or
+            getattr(ev, "sender", None) or
+            "UnnamedAgent"
+        )
+
+    #TODO: make sure that it prints the agent
     with open("agent_output.txt", "a", encoding="utf-8") as f:
         async for ev in handler.stream_events():
-            agent_info = f"[{getattr(ev, 'name', 'unknown agent')}] "
+            agent_name = get_agent_name(ev)
+            agent_info = f"[Agent: {agent_name}] "
+
             if isinstance(ev, ToolCallResult):
-                line = f"\n{agent_info}Called tool: {ev.tool_name} {ev.tool_kwargs} => {ev.tool_output}\n"
+                line = (
+                    f"\n{agent_info}🛠 Tool Called: {ev.tool_name}\n"
+                    f"{agent_info}🔧 Inputs: {ev.tool_kwargs}\n"
+                    f"{agent_info}📤 Output: {ev.tool_output}\n\n"
+                )
                 print(line, end="")
                 f.write(line)
-            elif isinstance(ev, AgentStream):  # showing the thought process
-                delta_line = f"{agent_info}{ev.delta}"
+
+            elif isinstance(ev, AgentStream):
+                delta = getattr(ev, "delta", "")
+                delta_line = f"{agent_info}💭 {delta}"
                 print(delta_line, end="", flush=True)
                 f.write(delta_line)
 
-    # async for ev in handler.stream_events():
-    # if isinstance(ev, ToolCallResult):
-    #     print("")
-    #     print("Called tool: ", ev.tool_name, ev.tool_kwargs, "=>", ev.tool_output)
-    #     await print(f"\nCalled tool: {ev.tool_name} {ev.tool_kwargs} => {ev.tool_output}\n")
-    # elif isinstance(ev, AgentStream):  # showing the thought process
-    #     print(ev.delta, end="", flush=True)
-    #     await print(ev.delta)
-    
+   
     resp = await handler
     
     print(resp)
