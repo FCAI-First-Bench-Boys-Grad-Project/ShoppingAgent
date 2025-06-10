@@ -6,22 +6,23 @@ from llama_index.tools.duckduckgo import DuckDuckGoSearchToolSpec
 # print([tool for tool in search_tool])
 
 
-def duck_search_tool(query :str) -> str:
+def duck_search_tool(query: str) -> str:
     """
     search for a specific query on internet.
     Args:
         query (str): The query to search with.
-        
+
     Returns:
         str: the result of searching.
     """
-    # Sleep for 1 second to avoid overwhelming the server
+    # Sleep for 3 seconds to avoid overwhelming the server
     time.sleep(3)
-   
+
     tool_spec = DuckDuckGoSearchToolSpec()
     result = tool_spec.duckduckgo_full_search(query)
-    
+
     return result
+
 
 search_tool = FunctionTool.from_defaults(
     name="duckduckgo_full_search",
