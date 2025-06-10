@@ -12,6 +12,7 @@ from llama_index.core.agent.workflow import AgentWorkflow, ToolCallResult, Agent
 # Custom imports
 from src.tools.web_search import search_tool
 from src.tools.visit_webpage import visit_webpage
+from src.tools.query_on_url import Get_info_from_url_tool
 from dotenv import load_dotenv
 import os
 
@@ -19,6 +20,7 @@ import os
 
 # Load environment variables from .env file
 load_dotenv()
+
 
 async def main():
 
@@ -51,7 +53,8 @@ async def main():
         name=config["product_hunter_agent"]["name"],
         description=config["product_hunter_agent"]["description"],
         system_prompt=config["product_hunter_agent"]["system_prompt"],
-        tools=[search_tool, visit_webpage],
+        # tools=[search_tool, visit_webpage],
+        tools=[search_tool, visit_webpage, Get_info_from_url_tool],
         llm=llm,
     )
 
@@ -59,7 +62,9 @@ async def main():
         name=config["trivial_search_agent"]["name"],
         description=config["trivial_search_agent"]["description"],
         system_prompt=config["trivial_search_agent"]["system_prompt"],
-        tools=[search_tool, visit_webpage],
+        # tools=[search_tool, visit_webpage],
+
+        tools=[search_tool, visit_webpage, Get_info_from_url_tool],
         llm=llm,
     )
 
@@ -67,7 +72,8 @@ async def main():
         name=config["shopping_researcher_agent"]["name"],
         description=config["shopping_researcher_agent"]["description"],
         system_prompt=config["shopping_researcher_agent"]["system_prompt"],
-        tools=[search_tool, visit_webpage],
+        # tools=[search_tool, visit_webpage],
+        tools=[search_tool, visit_webpage, Get_info_from_url_tool],
         llm=llm,
     )
 
@@ -75,14 +81,15 @@ async def main():
         name=config["product_investigator_agent"]["name"],
         description=config["product_investigator_agent"]["description"],
         system_prompt=config["product_investigator_agent"]["system_prompt"],
-        tools=[search_tool, visit_webpage],
+        # tools=[search_tool, visit_webpage],
+        tools=[search_tool, visit_webpage, Get_info_from_url_tool],
         llm=llm,
     )
 
-
     workflow = AgentWorkflow(
-        #TODO: Add the rest of the agents & Make their tools
-        agents=[manager_agent, shopping_researcher_agent , product_hunter_agent, product_investigator_agent, trivial_search_agent],
+        # TODO: Add the rest of the agents & Make their tools
+        agents=[manager_agent, shopping_researcher_agent, product_hunter_agent,
+                product_investigator_agent, trivial_search_agent],
         root_agent="manager_agent"
     )
 
@@ -102,7 +109,7 @@ async def main():
         ctx=ctx
     )
 
-    with open("agent_output.txt", "a", encoding="utf-8") as f:
+    with open("agent_output.txt", "w", encoding="utf-8") as f:
         async for ev in handler.stream_events():
             agent_info = f"[{getattr(ev, 'name', 'unknown agent')}] "
             if isinstance(ev, ToolCallResult):
@@ -122,9 +129,9 @@ async def main():
     # elif isinstance(ev, AgentStream):  # showing the thought process
     #     print(ev.delta, end="", flush=True)
     #     await print(ev.delta)
-    
+
     resp = await handler
-    
+
     print(resp)
 
 if __name__ == "__main__":
