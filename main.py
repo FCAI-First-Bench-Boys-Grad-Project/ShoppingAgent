@@ -105,24 +105,6 @@ async def main():
     prompt = "I want to buy a new phone but I have 5000 EGP only"
     # prompt = "I want to buy a wedding suit with tie and everything with a maximum budget of 30k EGP in Cairo."
 
-    handler = workflow.run(
-        user_msg=prompt,
-        ctx=ctx
-    )
-
-    # with open("agent_output.txt", "a", encoding="utf-8") as f:
-    #     async for ev in handler.stream_events():
-    #         agent_info = f"[{getattr(ev, 'name', 'unknown agent')}] "
-    #         if isinstance(ev, ToolCallResult):
-    #             line = f"\n{agent_info}Called tool: {ev.tool_name} {ev.tool_kwargs} => {ev.tool_output}\n"
-    #             print(line, end="")
-    #             f.write(line)
-    #         elif isinstance(ev, AgentStream):  # showing the thought process
-    #             delta_line = f"{agent_info}{ev.delta}"
-    #             print(delta_line, end="", flush=True)
-    #             f.write(delta_line)
-    # Set a default agent name if not present
-
     def get_agent_name(ev):
         # Try all potential fields
         return (
@@ -132,30 +114,79 @@ async def main():
             "UnnamedAgent"
         )
 
+    conversation_history = []
+    while True:
+        try:
+            # Get user input
+            prompt = input("\nEnter your shopping query (or 'exit' to quit): ")
+
+            if prompt.lower() == 'exit':
+                break
+
+            # Add prompt to history
+            conversation_history.append({"role": "user", "content": prompt})
+
+            # Update context with history
+            ctx.message_history = conversation_history
+
+            handler = workflow.run(
+                user_msg=prompt,
+                ctx=ctx
+            )
+
+            # Process agent responses
+            with open("agent_output.txt", "a", encoding="utf-8") as f:
+                async for ev in handler.stream_events():
+                    agent_name = get_agent_name(ev)
+                    agent_info = f"[Agent: {agent_name}] "
+
+                    if isinstance(ev, ToolCallResult):
+                        line = (
+                            f"\n{agent_info}🛠 Tool Called: {ev.tool_name}\n"
+                            f"{agent_info}🔧 Inputs: {ev.tool_kwargs}\n"
+                            f"{agent_info}📤 Output: {ev.tool_output}\n\n"
+                        )
+                        print(line, end="")
+                        f.write(line)
+
+                    elif isinstance(ev, AgentStream):
+                        delta = getattr(ev, "delta", "")
+                        delta_line = f"{agent_info}💭 {delta}"
+                        print(delta_line, end="", flush=True)
+                        f.write(delta_line)
+                resp = await handler
+                # Add response to history
+                conversation_history.append(
+                    {"role": "assistant", "content": str(resp)})
+                print('response: ', resp)
+
+        except Exception as e:
+            print(f"Error: {e}")
+            continue
+
     # TODO: make sure that it prints the agent
-    with open("agent_output.txt", "a", encoding="utf-8") as f:
-        async for ev in handler.stream_events():
-            agent_name = get_agent_name(ev)
-            agent_info = f"[Agent: {agent_name}] "
+    # with open("agent_output.txt", "a", encoding="utf-8") as f:
+    #     async for ev in handler.stream_events():
+    #         agent_name = get_agent_name(ev)
+    #         agent_info = f"[Agent: {agent_name}] "
 
-            if isinstance(ev, ToolCallResult):
-                line = (
-                    f"\n{agent_info}🛠 Tool Called: {ev.tool_name}\n"
-                    f"{agent_info}🔧 Inputs: {ev.tool_kwargs}\n"
-                    f"{agent_info}📤 Output: {ev.tool_output}\n\n"
-                )
-                print(line, end="")
-                f.write(line)
+    #         if isinstance(ev, ToolCallResult):
+    #             line = (
+    #                 f"\n{agent_info}🛠 Tool Called: {ev.tool_name}\n"
+    #                 f"{agent_info}🔧 Inputs: {ev.tool_kwargs}\n"
+    #                 f"{agent_info}📤 Output: {ev.tool_output}\n\n"
+    #             )
+    #             print(line, end="")
+    #             f.write(line)
 
-            elif isinstance(ev, AgentStream):
-                delta = getattr(ev, "delta", "")
-                delta_line = f"{agent_info}💭 {delta}"
-                print(delta_line, end="", flush=True)
-                f.write(delta_line)
+    #         elif isinstance(ev, AgentStream):
+    #             delta = getattr(ev, "delta", "")
+    #             delta_line = f"{agent_info}💭 {delta}"
+    #             print(delta_line, end="", flush=True)
+    #             f.write(delta_line)
 
-    resp = await handler
+    # resp = await handler
 
-    print(resp)
 
 if __name__ == "__main__":
     asyncio.run(main())

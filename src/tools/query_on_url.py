@@ -1,5 +1,4 @@
 from gradio_client import Client
-import re
 import time
 import requests
 from typing import Any, Optional
@@ -19,6 +18,8 @@ def query_url_tool(url: str) -> str:
     Returns:
         str: The content of the URL in markdown format.
     """
+    # Sleep for 3 seconds to avoid overwhelming the server
+    time.sleep(3)
     try:
         result = client.predict(
             content="url",
@@ -39,5 +40,5 @@ def query_url_tool(url: str) -> str:
 Get_info_from_url_tool = FunctionTool.from_defaults(
     name="Get_info_from_url",
     fn=query_url_tool,
-    description="Given a URL, it returns a JSON object that contains all the important attributes about a product."
+    description="Given a product's URL, it returns a JSON object that contains all the important attributes about a product."
 )
