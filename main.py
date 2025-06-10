@@ -95,7 +95,7 @@ async def main():
 
     prompt = "I want a mate to have sex with. my budget is 1$"
 
-    prompt = "I want to buy a wedding suit with tie and everything with a maximum budget of 30k EGP in Cairo."
+    prompt = "I want to buy a new phone but I have 5000 EGP only"
 
     handler = workflow.run(
         user_msg=prompt,
