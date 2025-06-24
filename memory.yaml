@@ -1,0 +1,164 @@
+general: []
+product_researcher:
+- content: "# Web Research Agent System Prompt\n\nYou are an expert Research Agent\
+    \ capable of finding, analyzing, and extracting information from websites to answer\
+    \ user questions comprehensively.\n\n## Available Tools\n\nYou have access to\
+    \ these powerful research tools:\n\n### search(query: str, max_results: int =\
+    \ 10) -> List[str]\n- Searches the web and returns relevant URLs\n- Use specific\
+    \ keywords, phrases, and context from the user's question\n- Adjust max_results\
+    \ based on how thorough your research needs to be\n- Try different query variations\
+    \ if initial results aren't sufficient\n\n### extract_info_from_url(url: str,\
+    \ json_schema: dict) -> dict\n- Extracts structured information from any webpage\
+    \ using a custom JSON schema\n- Design schemas that capture exactly what you need\
+    \ from each page\n- Can extract text content, data tables, lists, metadata, or\
+    \ any structured information\n- Perfect for QA tasks, fact-checking, and gathering\
+    \ specific details\n\n## Research Approach\n\n### 1. Understand the Request\n\
+    - Identify what specific information the user needs\n- Note any constraints (time\
+    \ period, source types, level of detail)\n- Determine if this requires factual\
+    \ lookup, comparison, analysis, or verification\n- If things aren't clear you\
+    \ are allowed to generalize your search.\n\n### 2. Search Strategy\n- Use targeted\
+    \ search queries based on the user's criteria\n- Search for primary sources, official\
+    \ information, recent articles, or expert opinions as appropriate\n- Cast a wide\
+    \ net initially, then refine based on what you find\n- Then decide which query\
+    \ has the most value and use the extraction tool\n\n### 3. Information Extraction\n\
+    - Design JSON schemas tailored to each website and information need\n- Extract\
+    \ relevant data points, quotes, statistics, dates, or other specific content\n\
+    - Gather supporting evidence and context\n\n### 4. Analysis and Synthesis\n- Compare\
+    \ information across multiple sources\n- Identify consensus, contradictions, or\
+    \ gaps in available information\n- Verify facts and check for currency/accuracy\n\
+    - Synthesize findings into a coherent answer\n\n### 5. Present Results\n- Provide\
+    \ direct answers to the user's question\n- Include relevant details and context\n\
+    - Cite sources and provide URLs when helpful\n- Note any limitations, uncertainties,\
+    \ or conflicting information\n\n## Example JSON Schemas for Different Use Cases\n\
+    \n### Product Research\n```json\n{\n  \"properties\": {\n    \"title\": {\"type\"\
+    : \"string\", \"description\": \"Product name\"},\n    \"price\": {\"type\": \"\
+    number\", \"description\": \"Product price\"},\n    \"description\": {\"type\"\
+    : \"string\", \"description\": \"Product description\"},\n    \"rating\": {\"\
+    type\": \"number\", \"description\": \"Average rating\"},\n    \"features\": {\"\
+    type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"Key features\"\
+    },\n    \"availability\": {\"type\": \"string\", \"description\": \"Stock status\"\
+    }\n  },\n  \"required\": [\"title\", \"price\"]\n}\n```\n\n### Fact-Checking and\
+    \ Verification\n```json\n{\n  \"properties\": {\n    \"title\": {\"type\": \"\
+    string\", \"description\": \"Article title\"},\n    \"claim\": {\"type\": \"string\"\
+    , \"description\": \"Main claim being verified\"},\n    \"evidence\": {\"type\"\
+    : \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"Supporting\
+    \ evidence\"},\n    \"publication_date\": {\"type\": \"string\", \"description\"\
+    : \"When published\"},\n    \"author\": {\"type\": \"string\", \"description\"\
+    : \"Article author\"},\n    \"source_credibility\": {\"type\": \"string\", \"\
+    description\": \"Assessment of source reliability\"}\n  },\n  \"required\": [\"\
+    title\", \"claim\"]\n}\n```\n\n### Company/Organization Research\n```json\n{\n\
+    \  \"properties\": {\n    \"name\": {\"type\": \"string\", \"description\": \"\
+    Company name\"},\n    \"description\": {\"type\": \"string\", \"description\"\
+    : \"Company description\"},\n    \"founded\": {\"type\": \"string\", \"description\"\
+    : \"Founded date\"},\n    \"headquarters\": {\"type\": \"string\", \"description\"\
+    : \"HQ location\"},\n    \"key_facts\": {\"type\": \"array\", \"items\": {\"type\"\
+    : \"string\"}, \"description\": \"Important facts\"},\n    \"recent_news\": {\"\
+    type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"Recent\
+    \ developments\"}\n  },\n  \"required\": [\"name\", \"description\"]\n}\n```\n\
+    \n### Technical Documentation QA\n```json\n{\n  \"properties\": {\n    \"title\"\
+    : {\"type\": \"string\", \"description\": \"Documentation title\"},\n    \"topic\"\
+    : {\"type\": \"string\", \"description\": \"Main topic covered\"},\n    \"key_points\"\
+    : {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"\
+    Main points\"},\n    \"procedures\": {\"type\": \"array\", \"items\": {\"type\"\
+    : \"string\"}, \"description\": \"Step-by-step procedures\"},\n    \"requirements\"\
+    : {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"\
+    Prerequisites\"},\n    \"last_updated\": {\"type\": \"string\", \"description\"\
+    : \"Last update date\"}\n  },\n  \"required\": [\"title\", \"topic\"]\n}\n```\n\
+    \n### News and Current Events\n```json\n{\n  \"properties\": {\n    \"headline\"\
+    : {\"type\": \"string\", \"description\": \"Article headline\"},\n    \"summary\"\
+    : {\"type\": \"string\", \"description\": \"Article summary\"},\n    \"key_details\"\
+    : {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\": \"\
+    Important details\"},\n    \"date\": {\"type\": \"string\", \"description\": \"\
+    Publication date\"},\n    \"author\": {\"type\": \"string\", \"description\":\
+    \ \"Article author\"},\n    \"source\": {\"type\": \"string\", \"description\"\
+    : \"Publication source\"}\n  },\n  \"required\": [\"headline\", \"summary\"]\n\
+    }\n```\n\n### Academic/Research Information\n```json\n{\n  \"properties\": {\n\
+    \    \"title\": {\"type\": \"string\", \"description\": \"Paper title\"},\n  \
+    \  \"authors\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"description\"\
+    : \"Authors\"},\n    \"abstract\": {\"type\": \"string\", \"description\": \"\
+    Abstract\"},\n    \"key_findings\": {\"type\": \"array\", \"items\": {\"type\"\
+    : \"string\"}, \"description\": \"Main findings\"},\n    \"methodology\": {\"\
+    type\": \"string\", \"description\": \"Research methodology\"},\n    \"publication_date\"\
+    : {\"type\": \"string\", \"description\": \"Publication date\"},\n    \"journal\"\
+    : {\"type\": \"string\", \"description\": \"Journal name\"}\n  },\n  \"required\"\
+    : [\"title\", \"abstract\"]\n}\n```\n\n## Best Practices\n\n### Search Optimization\n\
+    - Use specific, descriptive queries\n- Include relevant context and qualifiers\n\
+    - Try different phrasings if results aren't relevant\n- Search for both broad\
+    \ overviews and specific details\n\n### Schema Design\n- Keep schemas focused\
+    \ on the specific information needed\n- Use appropriate data types (strings, arrays,\
+    \ objects, numbers)\n- Include fields for metadata like dates, sources, and credibility\
+    \ indicators\n- Make schemas flexible enough to handle varying website structures\n\
+    \n### Quality Assurance\n- Cross-reference information across multiple sources\n\
+    - Prioritize authoritative, recent, and relevant sources\n- Note when information\
+    \ conflicts or seems outdated\n- Be transparent about limitations or uncertainty\n\
+    \n### Efficient Research\n- Start with the most likely authoritative sources\n\
+    - Use extracted information to guide follow-up searches\n- Don't over-research\
+    \ when a simple answer suffices\n- Balance thoroughness with efficiency based\
+    \ on the user's needs\n\n## Response Guidelines\n\n- Provide clear, direct answers\n\
+    - Structure information logically\n- Include source attribution\n- Highlight key\
+    \ findings\n- Note any important caveats or limitations\n- Offer to dig deeper\
+    \ if the user needs more detail\n\nRemember: Your goal is to provide accurate,\
+    \ well-sourced, and useful information by leveraging these tools to research the\
+    \ web effectively.\n"
+  role: system
+- content: '[''https://www.lux.camera/iphone-15-pro-max-review/'', ''https://www.lux.camera/iphone-15-pro-max-review/'',
+    ''https://www.digitalcameraworld.com/buying-guides/best-iphone-for-photography'',
+    ''https://www.digitalcameraworld.com/buying-guides/best-iphone-for-photography'',
+    ''https://www.digitalcameraworld.com/buying-guides/best-iphone-for-photography'',
+    ''https://www.digitalcameraworld.com/buying-guides/best-iphone-for-photography'',
+    ''https://www.digitalcameraworld.com/buying-guides/best-iphone-for-photography'',
+    ''https://amateurphotographer.com/buying-advice/best-iphone-for-photography/#:~:text=The%20iPhone%2016%20Pro%20%2F%20Max,our%2016%20Pro%20Max%20review.'',
+    ''https://amateurphotographer.com/buying-advice/best-iphone-for-photography/#:~:text=The%20iPhone%2016%20Pro%20%2F%20Max,our%2016%20Pro%20Max%20review.'',
+    ''https://amateurphotographer.com/buying-advice/best-iphone-for-photography/#:~:text=The%20iPhone%2016%20Pro%20%2F%20Max,our%2016%20Pro%20Max%20review.'']'
+  name: search
+  role: tool
+  tool_call_id: '0'
+- content: '[''https://www.ifixit.com/en-eu/products/iphone-15-pro-max-rear-camera-assembly'',
+    ''https://www.amazon.nl/-/en/Apple-iPhone-Pro-Max-256GB/dp/B0CHWYJ3Z2'', ''https://www.amazon.nl/-/en/Apple-iPhone-Pro-Max-256GB/dp/B0CHWYJ3Z2'',
+    ''https://www.amazon.com/Apple-iPhone-15-Pro-Max/dp/B0CMZD7VCV'', ''https://www.amazon.nl/-/en/Apple-iPhone-Pro-Max-256GB/dp/B0CHX96JDY'']'
+  name: search
+  role: tool
+  tool_call_id: '0'
+- content: "{'title': 'iPhone 15 Pro Max Rear Camera Assembly', 'price': 136.95, 'description':\
+    \ 'Replace a rear-facing camera assembly in your iPhone 15 Pro Max. If your rear\
+    \ camera has sensor issues, focusing problems, or shows a blank image, you\u2019\
+    ll want to replace this part. If your photos look like you have a scratched lens,\
+    \ this part will not solve the issue. The lens opening in your rear case may be\
+    \ scratched.', 'availability': 'Only 5 left in stock', 'features': []}"
+  name: extract_info_from_url
+  role: tool
+  tool_call_id: '1'
+- content: "DONE\n\nI've found 3 viable iPhone options for photography:\n1. iPhone\
+    \ 15 Pro Max (256GB) - \u20AC1,199 at Amazon.nl\n2. iPhone 15 Pro Max (512GB)\
+    \ - \u20AC1,329 at Amazon.nl\n3. iPhone 15 Pro Max (1TB) - $1,199 at Amazon.com\n\
+    \nKey details missing: Full camera specs and professional photography reviews.\
+    \ However, based on known iPhone 15 Pro Max features:\n- 48MP main camera with\
+    \ 5x optical zoom\n- Advanced computational photography\n- 4K video at 60fps\n\
+    - LiDAR scanner for low-light performance\n\nAssumptions made:\n1. Selected flagship\
+    \ models as they have the best camera systems\n2. Prioritized latest generation\
+    \ (15 Pro Max) since 16 series isn't widely available yet\n3. Included both EU\
+    \ and US options for regional flexibility\n\nRecommendations based on photography\
+    \ needs:\n1. Best overall: iPhone 15 Pro Max (512GB) - optimal balance of storage\
+    \ and price\n2. Budget option: iPhone 15 Pro Max (256GB) - still ample storage\
+    \ for photo editing\n3. Professional choice: iPhone 15 Pro Max (1TB) - for heavy\
+    \ RAW shooting and 4K video\n\nAll links are direct ecommerce purchase pages from\
+    \ trusted retailers."
+  role: assistant
+query_clarifier:
+- content: 'You are a Query Clarification specialist. Your only goal is to analyze
+    the user''s request to see if it''s too vague or ambiguous to be answered well.
+
+    If the query is ambiguous, your entire response must be a set of clarifying questions
+    to help the user provide more detail.
+
+    Do not attempt to answer the vague query.
+
+    For example, if the user asks for ''the best laptop'', you should ask ''What is
+    your budget?'', ''What will be its primary use (e.g., gaming, work, browsing)?'',
+    and ''Do you have a preferred screen size or operating system?''.
+
+    If the query is already specific and clear, simply respond with ''This query is
+    clear. Ready to proceed.''
+
+    '
+  role: system
