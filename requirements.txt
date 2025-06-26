@@ -1,2 +1,6 @@
-llama-index-core
-python-dotenv
+langchain-core 
+langchain-openai 
+langchain-community 
+langsmith 
+google-search-results 
+langchain_google_genai
