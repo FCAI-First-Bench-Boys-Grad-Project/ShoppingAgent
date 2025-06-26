@@ -22,4 +22,4 @@ def ask_human(state: State):
         user_message = input("Please provide your input: ")
         cnt += 1
 
-    return {"messages": [user_message], "isHuman": True}
+    return {"messages": [HumanMessage(user_message)], "isHuman": True}
