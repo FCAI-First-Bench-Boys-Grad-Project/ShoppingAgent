@@ -1,5 +1,5 @@
-https://realpython.com/python-web-scraping-practical-introduction/
-https://realpython.com/python-web-scraping-practical-introduction/
 https://www.geeksforgeeks.org/python-web-scraping-tutorial/
-https://oxylabs.io/blog/python-web-scraping
-https://www.reddit.com/r/webscraping/comments/10lwpoa/best_language_for_web_scrapping/
+https://www.geeksforgeeks.org/python-web-scraping-tutorial/
+https://www.reddit.com/r/learnpython/comments/qzr8ir/how_to_start_web_scraping_with_python/
+https://www.scrapingbee.com/blog/web-scraping-101-with-python/
+https://guides.lib.utexas.edu/web-scrapping/scraping-with-python
