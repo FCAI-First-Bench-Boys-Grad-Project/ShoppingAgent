@@ -15,7 +15,7 @@ dotenv.load_dotenv()
 
 async def search_urls(query: str, max_results: int = 10) -> List[str]:
     """Simple function to get URLs from Google search"""
-    async with GoogleURLScraper(headless=False) as scraper:
+    async with GoogleURLScraper(headless=True) as scraper:
         urls = await scraper.get_search_urls(query, max_results)
         return urls
 
@@ -28,7 +28,7 @@ def extract_info_from_url(url: str, json_schema: dict) -> dict:
     """Extracts information from a given URL using a JSON schema."""
     json_schema = json_repair.repair_json(str(json_schema))  # Ensure the JSON schema is valid
 
-    client = Client("Agents-MCP-Hackathon/MCP_Server_Web2JSON")
+    client = Client("garage-lab/MCP_WEB2JSON")
     result = client.predict(
             content=url,
             is_url=True,
