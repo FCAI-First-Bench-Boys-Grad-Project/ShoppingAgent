@@ -48,9 +48,9 @@ system_prompt = load_system_prompt("product_hunter_agent")
 
 
 def extract_links(links: list[Link]) -> str:
-    res = ''
+    res = 'Here are the links and information I found:\n'
     for link in links[0]:  # Assuming links are stored in a list of lists
-        res += f"URL: {link.link}\nDescription: {link.description}\n"
+        res += f"URL: {link.link}\nSummary: {link.description}\n"
     return res if res else "No links found."
 
 
@@ -59,7 +59,7 @@ price: float = Product price
 description: str = Product description
 available: bool = Is available"""
 
-CONTEXT_WINDOW = 4
+CONTEXT_WINDOW = 10
 
 
 def product_hunter_agent(state: State):
@@ -80,7 +80,7 @@ def product_hunter_agent(state: State):
         messages.append(HumanMessage(content=extract_links(state['links'])))
         response = llm.invoke(messages)
 
-        return {"messages": [HumanMessage(response.message)], "isHuman": False, "next_node": "manager"}
+        return {"messages": [HumanMessage(response.message)], "isHuman": False, "next_node": "manager", "product_hunter_thoughts": [AIMessage(response.thought)], }
     messages.append(HumanMessage(content=state["messages"][-1].content))
     response = llm.invoke(messages)
 

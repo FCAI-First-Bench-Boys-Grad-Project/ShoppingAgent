@@ -41,11 +41,11 @@ system_prompt = load_system_prompt("researcher_agent")
 scraping_schema = """title: str = Page title
 summary: str = Page summary
 """
-CONTEXT_WINDOW = 4
+CONTEXT_WINDOW = 10
 
 
 def extract_links(links: list[Link]) -> str:
-    res = ''
+    res = 'Here are the links and information I found:\n'
     for link in links[0]:  # Assuming links are stored in a list of lists
         res += f"URL: {link.link}\nSummary: {link.description}\n"
     return res if res else "No links found."
@@ -69,13 +69,24 @@ def researcher_agent(state: State):
         messages.append(HumanMessage(content=extract_links(state['links'])))
         response = llm.invoke(messages)
 
-        return {"messages": [HumanMessage(response.message)], "isHuman": False, "next_node": "manager"}
+        return {"messages": [HumanMessage(response.message)],
+                "isHuman": False,
+                "next_node": "manager",
+                "researcher_thoughts": [AIMessage(response.thought)],
+                }
     messages.append(HumanMessage(content=state["messages"][-1].content))
     response = llm.invoke(messages)
-
-    return {"messages": [AIMessage(response.query)],
+    if response.isSearch:
+        # If the agent is calling the searching tool, return its query
+        return {"messages": [HumanMessage(response.query)],
+                "researcher_thoughts": [AIMessage(response.thought)],
+                "isHuman": False,
+                "next_node": "searching_tool",
+                "last_agent": "researcher_agent"
+                }
+    return {"messages": [HumanMessage(response.message)],
             "researcher_thoughts": [AIMessage(response.thought)],
             "isHuman": False,
-            "next_node": "searching_tool",
+            "next_node": "manager",
             "last_agent": "researcher_agent"
             }

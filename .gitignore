@@ -4,3 +4,6 @@ __pycache__
 *_example.py
 notes
 test.py
+*.png
+*.json
+*.log

@@ -44,7 +44,7 @@ class ManagerOutput(BaseModel):
 # Define the function that calls the model
 llm = model.with_structured_output(ManagerOutput)
 
-CONTEXT_WINDOW = 10  # Number of previous thoughts to consider for context
+CONTEXT_WINDOW = 20  # Number of previous thoughts to consider for context
 
 
 def manager_agent(state: State):
@@ -95,8 +95,10 @@ def manager_agent(state: State):
             "links": [],
         }
 
+
+# calling the next agent (making sure the message is HumanMessage so the agent can understand it is a request)
     return {
-        "messages": [AIMessage(response.message)],
+        "messages": [HumanMessage(response.message)],
         "chain_of_thoughts": [response.chain_of_thoughts],
         "next_node": response.next_node,
         "final_response": "",
