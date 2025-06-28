@@ -20,7 +20,7 @@ from src.nodes.searching_tool import searching_tool
 from src.nodes.scraping_tool import scraping_tool
 from IPython.display import Image
 
-
+# THis is my branch now abo abdo 
 load_dotenv()
 
 
@@ -87,9 +87,9 @@ with open("graph.png", "wb") as f:
     f.write(graph.get_graph().draw_mermaid_png())
 print("Graph image saved as graph.png")
 
-# user_input = "i want to buy a phone with a $300 budget, i don't have any specific specifications, but i want it to be a good phone. can you help me find one?"
+user_input = "i want to buy a phone with a $300 budget, i don't have any specific specifications, but i want it to be a good phone. can you help me find one?"
 # user_input = "i want something"
-user_input = "I want to build a gaming PC with under 1000 USD"
+# user_input = "I want to build a gaming PC with under 1000 USD"
 state = graph.invoke({"messages": [HumanMessage(user_input)],
                      "isHuman": True, "next_node": "manager", "final_response": "", "user_messages": [HumanMessage(user_input)]})
 
