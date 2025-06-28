@@ -8,19 +8,17 @@ import uuid
 from langchain_core.messages import HumanMessage
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import START, MessagesState, StateGraph
-from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 from src.states.MainState import MainState as State
 
 from src.utils.load_system_prompt import load_system_prompt
+from src.modules.Link import Link
+
+from src.tools.searching_tool import search_tool
 
 
-# Define the function that calls the model
-def ask_human(state: State):
-    print(state['messages'])
-    user_message = ''
-    cnt = 0
-    while (user_message == '' and cnt < 3):
-        user_message = input("Please provide your input: ")
-        cnt += 1
-
-    return {"messages": [HumanMessage(user_message)], "isHuman": True, "user_messages": [HumanMessage(user_message)]}
+def searching_tool(state: State):
+    query = state["messages"][-1].content if state["messages"] else ""
+    res = search_tool({"query": query})
+    links = [Link(link=link, description="") for link in res]
+    return {"links": links, "isScraped": False, "next_node": state['last_agent'], 'last_agent': state['last_agent']}

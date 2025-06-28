@@ -10,15 +10,12 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import START, MessagesState, StateGraph
 from langchain_core.messages import HumanMessage, SystemMessage
 from src.states.MainState import MainState as State
-
+from src.modules.llm import model
 from src.utils.load_system_prompt import load_system_prompt
 
 tools = []
 
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.0-flash",
-    temperature=0.5,
-)
+llm = model
 
 system_prompt = load_system_prompt("evaluator_agent")
 
@@ -34,4 +31,8 @@ def evaluator_agent(state: State):
             content=state["messages"][-1].content if state["messages"] else ""
         ),
     ])
-    return {"messages": [response], "isHuman": False, "next_node": "evaluator_agent"}
+    return {"messages": [HumanMessage(response.content)],
+            "isHuman": False,
+            "next_node": "manager",
+            "last_agent": "evaluator_agent"
+            }

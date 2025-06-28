@@ -1,14 +1,14 @@
 from gradio_client import Client
 import time
 import requests
-from typing import Any, Optional
-from llama_index.core.tools import FunctionTool
+from langchain_core.tools import tool
 
 
-client = Client("Agents-MCP-Hackathon/MCP_Server_Web2JSON")
+client = Client("garage-lab/MCP_WEB2JSON")
 
 
-def query_url_tool(url: str) -> str:
+@tool
+def query_url_tool(data_schema: str, url: str) -> str:
     """
     Queries a URL and returns the content as a markdown string.
 
@@ -18,16 +18,16 @@ def query_url_tool(url: str) -> str:
     Returns:
         str: The content of the URL in markdown format.
     """
-    # Sleep for 3 seconds to avoid overwhelming the server
-    time.sleep(3)
+    # Sleep for 2 seconds to avoid overwhelming the server
+    time.sleep(2)
     try:
         result = client.predict(
-            content="url",
+            content=url,
             is_url=True,
-            schema_name="Product",
+            schema_input=data_schema,
             api_name="/predict"
         )
-        return result
+        return str(result)
 
     except requests.exceptions.Timeout:
         return "The request timed out. Please try again later or check the URL."
@@ -37,8 +37,6 @@ def query_url_tool(url: str) -> str:
         return f"An unexpected error occurred: {str(e)}"
 
 
-Get_info_from_url_tool = FunctionTool.from_defaults(
-    name="Get_info_from_url",
-    fn=query_url_tool,
-    description="Given a product's URL, it returns a JSON object that contains all the important attributes about a product."
-)
+# print(query_url_tool(
+#     "https://www.amazon.com/Google-Pixel-Gemini-Smartphone-Incredible/dp/B0DVHV7N4X?th=1")
+# )
