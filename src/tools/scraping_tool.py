@@ -6,7 +6,7 @@ from langchain_core.tools import tool
 
 client = Client("garage-lab/MCP_WEB2JSON")
 
-
+#TODO: give power to the agent to choose the schema to use
 @tool
 def query_url_tool(data_schema: str, url: str) -> str:
     """

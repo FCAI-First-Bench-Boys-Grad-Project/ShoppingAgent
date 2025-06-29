@@ -1,15 +1,4 @@
-from typing_extensions import Literal
-from langchain.agents import AgentExecutor
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.memory import ConversationBufferMemory
-from langchain.agents import create_tool_calling_agent
-from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import BaseModel, Field
-import yaml
-import uuid
-from langchain_core.messages import HumanMessage
-from langgraph.checkpoint.memory import MemorySaver
-from langgraph.graph import START, MessagesState, StateGraph
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 # from src.states.ProductHunterState import ProductHunterState as State
 from src.states.MainState import MainState as State
@@ -18,8 +7,6 @@ from src.modules.Link import Link
 from src.tools.scraping_tool import query_url_tool
 from src.tools.searching_tool import search_tool
 from src.modules.llm import model
-
-from langgraph.prebuilt import create_react_agent
 tools = [query_url_tool, search_tool]
 
 

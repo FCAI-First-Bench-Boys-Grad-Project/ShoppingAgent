@@ -35,6 +35,7 @@ class MainState(TypedDict):
                         'researcher_agent', 'evaluator_agent', 'ask_human']
     next_node: str
     isHuman: bool
+    # TODO: not sure about this
     isScraped: bool
     scraping_schema: str
     final_response: str

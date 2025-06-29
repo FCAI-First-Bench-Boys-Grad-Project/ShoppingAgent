@@ -1,24 +1,14 @@
 from dotenv import load_dotenv
-from typing import Annotated,  Literal
 from langgraph.graph import StateGraph, START, END
-from langgraph.graph.message import add_messages
-from langchain.chat_models import init_chat_model
-from pydantic import BaseModel, Field
-from typing_extensions import TypedDict
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import HumanMessage
-import os
-import getpass
 from src.nodes.agents.manager import manager_agent
 from src.nodes.agents.product_hunter import product_hunter_agent
 from src.nodes.agents.evaluator import evaluator_agent
 from src.nodes.agents.researcher_agent import researcher_agent
-import langsmith
 from src.states.MainState import MainState as State
 from src.nodes.ask_human import ask_human
 from src.nodes.searching_tool import searching_tool
 from src.nodes.scraping_tool import scraping_tool
-from IPython.display import Image
 
 # THis is my branch now abo abdo 
 load_dotenv()
