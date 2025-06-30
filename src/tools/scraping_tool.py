@@ -10,13 +10,19 @@ client = Client("garage-lab/MCP_WEB2JSON")
 @tool
 def query_url_tool(data_schema: str, url: str) -> str:
     """
-    Queries a URL and returns the content as a markdown string.
+    Queries a URL and returns its content as a markdown string.
 
     Args:
         url (str): The URL to query.
+        data_schema (str): The schema to use for the data extraction.
+        for example:
+        title: str = Page title
+        price: float = Product price
+        description: str = Product description
+        available: bool = Is available
 
     Returns:
-        str: The content of the URL in markdown format.
+        str: The content of the URL in the format of whatever schema you give it.
     """
     # Sleep for 2 seconds to avoid overwhelming the server
     time.sleep(2)

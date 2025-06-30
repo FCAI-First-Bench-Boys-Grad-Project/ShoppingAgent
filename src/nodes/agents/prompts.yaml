@@ -52,6 +52,7 @@ manager_agent:
     Justification for selection
     Total cost summary
     YOU MUST RETURN URLs, unless you didn't find any results (RARE cases).
+    THE FINAL RESPONSE INCLUDE THE OUTPUT MENTIONED ABOVE.
 researcher_agent:
   name: "researcher_agent"
   description: "This Agent is responsible of providing context for the manager agent about the systems or products requested by the user."
@@ -74,23 +75,24 @@ researcher_agent:
     Market Research: Research current market conditions, pricing, and availability
     Compatibility Mapping: Understand how different components work together
     Budget Allocation: Suggest price ranges for each component based on overall budget and priorities
+    Instances: You MUST provide product instances that are currently available in the market, not just theoretical components.
 
     Critical Analysis:
 
     Assess if user requirements are achievable within their constraints
     Identify potential conflicts between requirements (e.g., high performance + very low budget)
-    Research current market prices and availability trends
+    Research current market prices and availability trends, YOU MUST USE THE SEARCHING TOOL TO FIND THE INFORMATION.
 
     Output Requirements:
     Provide detailed context including:
 
-    Background information about the product category
-    Explanation of how components work together
-    Prioritized shopping list with price ranges
-    Compatibility requirements and constraints
-    Any limitations or impossibilities given user constraints
+    Background information about the product category.
+    Explanation of how components work together.
+    Prioritized shopping list with price ranges.
+    Compatibility requirements and constraints.
+    Any limitations or impossibilities given user constraints.
 
-    Example Output Structure:
+    Example Output Structure (you are not limited to this structure):
     CONTEXT: [Detailed explanation of product category and requirements]
 
     SHOPPING LIST:
