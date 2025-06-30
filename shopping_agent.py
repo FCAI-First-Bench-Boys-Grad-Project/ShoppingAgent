@@ -57,7 +57,7 @@ class ShoppingAgent:
 
     def _load_system_prompt(self) -> SystemMessage:
         try:
-            with open(r"C:\Users\abdfa\Desktop\UNI STUFFING\GRADUATION PROJECT\Group Work\ShoppingAgent\src\prompts.yaml", "r", encoding="utf-8") as f:
+            with open("src\prompts.yaml", "r", encoding="utf-8") as f:
                 config = yaml.safe_load(f)
             prompt = config.get("ShoppingAgent", {}).get("system_prompt", "You are a helpful assistant.")
         except Exception as e:
