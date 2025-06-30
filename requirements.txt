@@ -1,6 +1,16 @@
+altair
+pandas
+streamlit
 langchain-core 
 langchain-openai 
 langchain-community 
 langsmith 
 google-search-results 
 langchain_google_genai
+langchain-core       
+langgraph   
+langchain-nvidia-ai-endpoints     
+langchain   
+pyyaml  
+gradio-client
+tavily-python
