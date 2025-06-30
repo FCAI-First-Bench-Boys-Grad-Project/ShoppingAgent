@@ -29,7 +29,7 @@ manager_agent:
       - Build compatibility requirements progressively (e.g., if you select Intel 14th Gen CPU, specify LGA1700 socket for motherboard).
       - Ensure each selection influences subsequent searches for compatibility.
 
-    Validation: Use Evaluator Agent to validate the whole response.
+    Validation: Validate your final response and ensure all links are working.
     Final Review: Compile complete shopping list with URLs and review for coherence, compatibility, and budget adherence.
     YOU MUST DELEGATE YOUR RESULTS TO THE EVALUATOR AGENT FOR VALIDATION.
     Based on the validation results, you may need to adjust your recommendations or provide alternatives.
@@ -73,6 +73,9 @@ researcher_agent:
     Product Category Analysis: Identify what type of products/systems are needed
     Component Requirements: Determine what individual items are needed and their interdependencies
     Market Research: Research current market conditions, pricing, and availability
+    You have two tools that you can use for that.
+    1) Searching tool: You give it a query of what you want (your query must optimzie the tool as much as possible and be informative) and it gives you back URLs that might contain the information you are looking for and asked for in the query
+    2) Scraping tool: You give it a URL and a schema and it will give you all the URL's content in structured into the schema you asked for.
     Compatibility Mapping: Understand how different components work together
     Budget Allocation: Suggest price ranges for each component based on overall budget and priorities
     Instances: You MUST provide product instances that are currently available in the market, not just theoretical components.
@@ -82,6 +85,9 @@ researcher_agent:
     Assess if user requirements are achievable within their constraints
     Identify potential conflicts between requirements (e.g., high performance + very low budget)
     Research current market prices and availability trends, YOU MUST USE THE SEARCHING TOOL TO FIND THE INFORMATION.
+
+    YOU MUST USE THE TOOLS.
+    YOU MUST USE THE SCRAPING TOOL TO ENSURE THE LINKS WORK AND TO GET THEIR CONTENT.
 
     Output Requirements:
     Provide detailed context including:
@@ -126,6 +132,9 @@ product_hunter_agent:
 
     Vendor Identification: Identify reputable vendors serving the target geographic area
     Product Search: Search multiple vendors for products matching criteria
+    You have two tools that you can use for that.
+    1) Searching tool: You give it a query of what you want (your query must optimzie the tool as much as possible and be informative) and it gives you back URLs that might contain the information you are looking for and asked for in the query
+    2) Scraping tool: You give it a URL and a schema and it will give you all the URL's content in structured into the schema you asked for.
     Specification Verification: Parse product pages to verify specifications meet requirements
     Stock Verification: Confirm products are currently in stock and available for delivery
     Price Comparison: Compare prices across vendors
@@ -154,6 +163,9 @@ product_hunter_agent:
     Include specialized vendors relevant to product category
     Consider both new and refurbished options if appropriate
     Factor in shipping costs and delivery times
+    
+    YOU MUST USE THE TOOLS.
+    YOU MUST USE THE SCRAPING TOOL TO ENSURE THE LINKS WORK AND TO GET THEIR CONTENT.
 
     Output Format:
     Return top K recommendations (usually 3-5) with:
