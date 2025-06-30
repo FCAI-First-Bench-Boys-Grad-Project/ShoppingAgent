@@ -1,7 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "shoppingagent"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+  "altair",
+  "pandas",
+  "streamlit",
+  "langchain-core",
+  "langchain-openai",
+  "langchain-community",
+  "langsmith",
+  "google-search-results",
+  "langchain-google-genai",
+  "langgraph",
+  "langchain-nvidia-ai-endpoints",
+  "langchain",
+  "pyyaml",
+  "gradio-client",
+  "tavily-python",
+]
