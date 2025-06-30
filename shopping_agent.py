@@ -32,7 +32,7 @@ def add_to_list_tool(name: str, url: str, details: str) -> str:
 # --- ShoppingAgent Class ---
 class ShoppingAgent:
     def __init__(self, model: str = "qwen/qwen3-235b-a22b"):
-        self.llm = ChatNVIDIA(model=model, max_tokens=8192)
+        self.llm = ChatNVIDIA(model=model, max_tokens=8192,extra_body={"chat_template_kwargs": {"thinking":True}},)
         
         self.environment_tools = [search_tool, query_url_tool, run_code_tool]
         self.state_tools = [add_to_list_tool]
