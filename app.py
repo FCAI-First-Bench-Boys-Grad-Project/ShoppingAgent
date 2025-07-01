@@ -1,7 +1,7 @@
 # app.py
 
 import streamlit as st
-from ShoppingAgent import ShoppingAgent
+from shopping_agent import ShoppingAgent
 from dotenv import load_dotenv
 
 RECURSION_LIMIT = 100
