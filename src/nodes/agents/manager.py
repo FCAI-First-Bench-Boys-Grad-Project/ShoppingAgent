@@ -1,27 +1,16 @@
-from ast import operator
-from typing import Annotated, Literal, TypedDict
-from langchain.agents import AgentExecutor
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.memory import ConversationBufferMemory
-from langchain.agents import create_tool_calling_agent
-from langchain_google_genai import ChatGoogleGenerativeAI
+from typing import Dict, List, Literal, Optional, Tuple
 from pydantic import BaseModel, Field
-import yaml
-import uuid
 from langchain_core.messages import HumanMessage
-from langgraph.checkpoint.memory import MemorySaver
-from langgraph.graph import START, MessagesState, StateGraph
-from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+from langchain_core.messages import HumanMessage, AIMessage
 from src.modules.llm import model
 from src.utils.load_system_prompt import load_system_prompt
 from src.states.MainState import MainState as State
 from langchain_core.language_models.chat_models import BaseChatModel
 from langgraph.types import Command
-from time import sleep, time
-from langgraph.graph import StateGraph, MessagesState, START, END
+from time import sleep
+from langgraph.graph import END
 from src.modules.llm import model
 
-# from src.modules.Thought import Thought
 
 tools = []
 
@@ -45,6 +34,9 @@ def make_supervisor_node(llm: BaseChatModel, members: list[str]) -> str:
         )
         final_response: str = Field(
             description="When all information is gathered, construct the final response for the user here. IT MUST CONTAIN ALL WHAT THE USER REQUESTED. THIS IS THE OUTPUT THAT THE USER WILL SEE. This field will be empty if the agent is not finished.")
+        products: List[str] = Field(
+            description="When the final response is constructed, all product links provided to the user should be stored as a flat list alternating between product name and product link, e.g., [name1, url1, name2, url2, ...]. THIS MUST NOT BE EMPTY IF THERE ARE LINKS IN THE FINAL RESPONSE AND IT MUST CONTAIN THEM. THIS FIELD WILL BE AN EMPTY LIST IF THE AGENT IS NOT FINISHED."
+        )
 
     def manager_node(state: State) -> Command[Literal[*members, "__end__"]]:
         """An LLM-based router."""
@@ -58,7 +50,14 @@ def make_supervisor_node(llm: BaseChatModel, members: list[str]) -> str:
         if goto == "end":
             goto = END
 
-        return Command(goto=goto, update={"next": goto, "messages": [AIMessage(response.thought), HumanMessage(response.message, name="manager")]})
+        return Command(goto=goto,
+                       update={"next": goto,
+                               "messages": [AIMessage(response.thought), HumanMessage(response.message, name="manager")],
+                               "final_response": response.final_response,
+                               "products": response.products,
+                               "thoughts": [response.thought]
+                               }
+                       )
 
     return manager_node
 

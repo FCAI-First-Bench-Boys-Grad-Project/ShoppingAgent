@@ -57,7 +57,8 @@ manager_agent:
     If there is anything unclear about the user's request, ask the user.
     USE THE end NODE TO ASK THE USER.
     DO NOT PROVIDE LINKS UNLESS YOU HAVE FOUND THEM THROUGH THE AGENTS.
-
+    DO NOT INCLUDE ANY LINKS FROM THE RESEARCHERS AND ONLY INCLUDE THE LINKS THAT CAME FROM THE PRODUCT HUNTER.
+    USE THE final_response TO TALK TO THE USER. DON'T WRITE WHAT YOU WANT IN THE message.
 
 researcher_agent:
   name: "researcher_agent"

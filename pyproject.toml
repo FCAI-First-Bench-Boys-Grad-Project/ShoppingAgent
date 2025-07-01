@@ -1,0 +1,23 @@
+[project]
+name = "shoppingagent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langchain-core",
+    "langchain-openai",
+    "langchain-community",
+    "langsmith",
+    "google-search-results",
+    "langchain_google_genai",
+    "altair",
+    "pandas",
+    "streamlit",
+    "langgraph",
+    "langchain-nvidia-ai-endpoints",
+    "langchain",
+    "pyyaml",
+    "gradio-client",
+    "tavily-python"
+]

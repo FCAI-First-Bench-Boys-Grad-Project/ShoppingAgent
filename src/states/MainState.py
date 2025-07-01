@@ -11,5 +11,9 @@ from langchain_core.messages import BaseMessage
 
 class MainState(MessagesState):
     next: str
-    prodcuts: List[str]
+    products: List[str]
     human_msg: HumanMessage
+    final_response: str
+    thoughts:  Annotated[
+        List[str], operator.add
+    ]
