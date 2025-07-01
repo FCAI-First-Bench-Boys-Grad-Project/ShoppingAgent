@@ -64,4 +64,4 @@ def make_supervisor_node(llm: BaseChatModel, members: list[str]) -> str:
 
 
 manager_node = make_supervisor_node(
-    model, ["researcher_agent", "product_hunter_agent", "ask_human"])
+    model, ["researcher_agent", "product_hunter_agent"])

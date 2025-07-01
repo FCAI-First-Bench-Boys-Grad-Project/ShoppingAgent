@@ -12,3 +12,4 @@ from langchain_core.messages import BaseMessage
 class MainState(MessagesState):
     next: str
     prodcuts: List[str]
+    human_msg: HumanMessage
