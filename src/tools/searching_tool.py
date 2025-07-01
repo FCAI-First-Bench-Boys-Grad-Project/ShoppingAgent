@@ -3,8 +3,6 @@ import time
 from typing import Any, Optional
 from langchain_core.tools import tool
 # Improved Google URL Scraper with better compatibility
-import asyncio
-from playwright.async_api import async_playwright
 import random
 from typing import List, Optional
 import time
