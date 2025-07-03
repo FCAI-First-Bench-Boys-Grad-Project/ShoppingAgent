@@ -31,7 +31,6 @@ class ShoppingAgent():
         self._graph_builder.add_node("manager", manager_node)
 
         self._graph_builder.add_edge(START, "manager")
-        self._graph_builder.add_edge("manager", END)
         self.ShoppingAgent = self._graph_builder.compile(
             checkpointer=self._checkpointer)
 
