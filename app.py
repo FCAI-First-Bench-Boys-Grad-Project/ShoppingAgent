@@ -1,9 +1,10 @@
-# app.py
-
 import streamlit as st
 from ShoppingAgent import ShoppingAgent
 from dotenv import load_dotenv
+from langsmith import Client
 
+
+client = Client()
 RECURSION_LIMIT = 100
 # Load environment variables
 load_dotenv()
