@@ -1,14 +1,5 @@
-import json
-import time
-from typing import Any, Optional
 from langchain_core.tools import tool
-# Improved Google URL Scraper with better compatibility
-import asyncio
-import nest_asyncio
-from playwright.async_api import async_playwright
-import random
-from typing import List, Optional
-import time
+from typing import List
 from tavily import TavilyClient
 import os
 tavily_client = TavilyClient(api_key=os.environ.get("TAVILY_API_KEY"))
