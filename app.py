@@ -93,7 +93,7 @@ if prompt := st.chat_input("e.g., Find me the best budget wireless earbuds"):
                  },
                 config={
                     "recursion_limit": RECURSION_LIMIT,
-                    "configurable": {"thread_id": "1"}
+                    "configurable": {"thread_id": st.session_state.thread_id}
                 },
                 stream_mode="updates"
             ):
