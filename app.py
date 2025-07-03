@@ -8,7 +8,6 @@ client = Client()
 RECURSION_LIMIT = 100
 # Load environment variables
 load_dotenv()
-print(os.environ)
 # --- Page Configuration ---
 st.set_page_config(
     page_title="🤖 Shopping Agent",
