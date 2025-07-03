@@ -2,13 +2,13 @@ import streamlit as st
 from ShoppingAgent import ShoppingAgent
 from dotenv import load_dotenv
 from langsmith import Client
-
+import os
 
 client = Client()
 RECURSION_LIMIT = 100
 # Load environment variables
 load_dotenv()
-
+print(os.environ)
 # --- Page Configuration ---
 st.set_page_config(
     page_title="🤖 Shopping Agent",
