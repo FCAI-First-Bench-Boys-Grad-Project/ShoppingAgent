@@ -20,7 +20,7 @@ system_prompt = load_system_prompt("manager_agent")
 
 def make_supervisor_node(llm: BaseChatModel, members: list[str]) -> str:
 
-    options = ["end"] + members
+    options = [END] + members
     system_prompt = load_system_prompt("manager_agent")
 
     class Router(BaseModel):
@@ -47,8 +47,6 @@ def make_supervisor_node(llm: BaseChatModel, members: list[str]) -> str:
         response = llm.with_structured_output(Router).invoke(messages)
         print(response)
         goto = response.next
-        if goto == "end":
-            goto = END
 
         return Command(goto=goto,
                        update={"next": goto,
