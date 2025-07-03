@@ -101,6 +101,9 @@ if prompt := st.chat_input("e.g., Find me the best budget wireless earbuds"):
             # Get the final response from the last message in the agent's state
             # final_response = st.session_state.agent.state["final_response"]
     final_response = next(iter(chunk.values())).get('final_response', "")
+    if final_response == "":
+        final_response = next(iter(chunk.values())).get(
+            'messages', "")[-1].content
     response_placeholder.markdown(final_response)
     st.session_state.shopping_list = next(
         iter(chunk.values())).get('products', [])
