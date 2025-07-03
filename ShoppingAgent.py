@@ -1,4 +1,4 @@
-from langgraph.graph import StateGraph, START
+from langgraph.graph import StateGraph, START, END
 from langchain_core.messages import HumanMessage
 from langchain_core.tools import tool
 from src.tools.scraping_tool import query_url_tool
@@ -31,6 +31,7 @@ class ShoppingAgent():
         self._graph_builder.add_node("manager", manager_node)
 
         self._graph_builder.add_edge(START, "manager")
+        self._graph_builder.add_edge("manager", END)
         self.ShoppingAgent = self._graph_builder.compile(
             checkpointer=self._checkpointer)
 

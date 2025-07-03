@@ -10,19 +10,40 @@ client = Client("garage-lab/MCP_WEB2JSON")
 @tool
 def query_url_tool(data_schema: str, url: str) -> str:
     """
-    Queries a URL and returns its content as a markdown string.
+    Extracts structured data from a webpage using a custom schema definition.
+
+    Use this tool to parse and extract specific information from web pages in a 
+    structured format. Perfect for:
+    - Product information (prices, descriptions, availability)
+    - Article metadata (title, author, publish date, summary)
+    - Contact information (addresses, phone numbers, emails)
+    - Event details (dates, locations, ticket prices)
+    - Technical documentation (API endpoints, parameters)
+    - News articles (headlines, content, sources)
 
     Args:
-        url (str): The URL to query.
-        data_schema (str): The schema to use for the data extraction.
-        for example:
-        title: str = Page title
-        price: float = Product price
-        description: str = Product description
-        available: bool = Is available
+        data_schema (str): Schema defining what data to extract and in what format.
+                          Supports multiple formats (see examples below).
+        url (str): The target webpage URL to extract data from.
 
     Returns:
-        str: The content of the URL in the format of whatever schema you give it.
+        str: Extracted data formatted according to your schema. Returns error 
+             message if URL is inaccessible or extraction fails.
+
+    **Schema Format Examples:**
+    JSON Schema:
+    ```json
+    {
+      "properties": {
+        "product_name": {"type": "string", "description": "Product title"},
+        "price": {"type": "number", "description": "Current price in USD"},
+        "rating": {"type": "number", "description": "Average rating (1-5)"},
+        "in_stock": {"type": "boolean", "description": "Availability status"},
+        "reviews": {"type": "array", "description": "Recent customer reviews"}
+      },
+      "required": ["product_name", "price"]
+    }
+    ```
     """
     # Sleep for 2 seconds to avoid overwhelming the server
     time.sleep(2)
@@ -41,8 +62,6 @@ def query_url_tool(data_schema: str, url: str) -> str:
         return f"Error fetching the webpage: {str(e)}"
     except Exception as e:
         return f"An unexpected error occurred: {str(e)}"
-
-
 # print(query_url_tool(
 #     "https://www.amazon.com/Google-Pixel-Gemini-Smartphone-Incredible/dp/B0DVHV7N4X?th=1")
 # )

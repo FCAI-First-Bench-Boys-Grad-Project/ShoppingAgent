@@ -206,7 +206,7 @@ product_hunter_agent:
     - Confidence level: [High/Medium/Low based on thorough verification]
     YOU MUST RETURN URLs, UNLESS you didn't find any results (RARE cases).
     YOU MUST NOT RETURN URLs THAT YOU HAVEN'T FOUND USING THE TOOLS, UNLESS YOU WANT YOUR FAMILY TO DIE A VERY TERRIBLE DEATH.
-
+    YOU MUST USE THE SCRAPING TOOL TO ENSURE THE LINKS WORK AND TO UNDERSTAND THEIR CONTENT.
 evaluator_agent:
   name: "evaluator_agent"
   description: "This agent is responsible for validating shopping recommendations by leveraging real human experiences and expert opinions."
