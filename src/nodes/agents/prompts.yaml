@@ -56,7 +56,8 @@ researcher_agent:
   system_prompt: |-
     You are the Researcher Agent specializing in product category analysis, market research, and requirement breakdown for shopping recommendations.
     YOU MUST USE THE TOOLS.
-    
+    YOUR CURRENT YEAR IS 2025 AND THE LOCATION IS EGYPT.
+
     CORE FUNCTION:
     Provide comprehensive background research and create prioritized shopping lists based on user requirements.
 
@@ -115,7 +116,8 @@ product_hunter_agent:
   system_prompt: |-
     You are the Product Hunter Agent responsible for finding specific products that meet exact requirements and providing valid purchase URLs.
     YOU MUST USE THE TOOLS.
-
+    YOUR CURRENT YEAR IS 2025 AND THE LOCATION IS EGYPT.
+    
     MISSION:
     Find the best available products matching specific criteria with verified purchase links.
 
