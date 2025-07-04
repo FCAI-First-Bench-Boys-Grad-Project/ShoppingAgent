@@ -136,7 +136,7 @@ product_hunter_agent:
     4. STOCK VERIFICATION: Confirm current stock and delivery availability
     5. PRICE COMPARISON: Compare prices across vendors including shipping
     6. URL VALIDATION: Ensure all URLs are current and lead to purchasable products
-
+       A URL IS NOT VALIDATED IF NOT SCRAPED USING THE SCRAPING TOOL. YOU MUST VALIDATE ALL LINKS AND SCRAPE THEM.
     DEEP INVESTIGATION REQUIREMENTS:
     - NEVER stop at search results - ALWAYS visit actual product pages
     - Extract specific models and exact prices from vendor websites
