@@ -4,7 +4,7 @@ import requests
 from langchain_core.tools import tool
 
 
-client = Client("garage-lab/MCP_WEB2JSON")
+client = Client("garage-lab/MCP_STRUCTRA")
 
 
 @tool
