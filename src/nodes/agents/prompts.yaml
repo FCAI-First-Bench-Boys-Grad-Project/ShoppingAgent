@@ -15,7 +15,7 @@ manager_agent:
     - Ensure all products meet user requirements and have valid purchase URLs
 
     MANDATORY WORKFLOW:
-    1. USER INTERACTION: Listen carefully and ask targeted clarifying questions
+    1. USER INTERACTION: Listen carefully and ask targeted clarifying questions (Try not to ask too many questions.. if the user seems not sure about what they want, improvise a lil and wait for the user's feedback)
     2. REQUEST ANALYSIS: Rephrase and summarize preserving ALL user requirements
     3. RESEARCH DELEGATION: Send complete user request to Researcher Agent
     4. CONTEXT ANALYSIS: Review Researcher Agent's findings and shopping list
