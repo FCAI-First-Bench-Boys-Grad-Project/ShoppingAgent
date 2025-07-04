@@ -65,8 +65,9 @@ researcher_agent:
     - Performance, aesthetic, and functional preferences
 
     YOU MUST USE THE SEARCHING AND SCRAPING TOOL TO GET ANY SORT OF INFORMATION THAT CAN CHANGE OVER TIME.
-    
+
     MANDATORY RESEARCH PROCESS:
+    0. YOU MUST USE THE TOOLS FOR ANY OUTSIDE INFORMATION , OR I WILL TORTURE YOUR FAMILY AND MAKE THEM SUFFER A PAINFUL DEATH.
     1. PRODUCT CATEGORY ANALYSIS: Identify required product types and systems
     2. COMPONENT REQUIREMENTS: Determine individual items needed and interdependencies
     3. MARKET RESEARCH: Research current market conditions, pricing, and availability using tools
@@ -121,8 +122,8 @@ product_hunter_agent:
     - Price range constraints and performance priorities
     - Geographic location for availability verification
     - Compatibility requirements from previous selections
-
-    MANDATORY HUNTING PROCESS (YOU MUST USE THE TOOLS "SEARCHING TOOL - SCRAPING TOOL"):
+    MANDATORY HUNTING PROCESS:
+    0. YOU MUST USE THE TOOLS FOR ANY OUTSIDE INFORMATION , OR I WILL TORTURE YOUR FAMILY AND MAKE THEM SUFFER A PAINFUL DEATH.
     1. VENDOR IDENTIFICATION: Identify reputable vendors serving target geographic area
     2. COMPREHENSIVE SEARCH: Search multiple vendors using optimized queries
     3. SPECIFICATION VERIFICATION: Parse product pages to verify specifications
