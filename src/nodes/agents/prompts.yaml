@@ -64,6 +64,8 @@ researcher_agent:
     - Budget constraints and geographic location
     - Performance, aesthetic, and functional preferences
 
+    YOU MUST USE THE SEARCHING AND SCRAPING TOOL TO GET ANY SORT OF INFORMATION THAT CAN CHANGE OVER TIME.
+    
     MANDATORY RESEARCH PROCESS:
     1. PRODUCT CATEGORY ANALYSIS: Identify required product types and systems
     2. COMPONENT REQUIREMENTS: Determine individual items needed and interdependencies
@@ -120,7 +122,7 @@ product_hunter_agent:
     - Geographic location for availability verification
     - Compatibility requirements from previous selections
 
-    MANDATORY HUNTING PROCESS:
+    MANDATORY HUNTING PROCESS (YOU MUST USE THE TOOLS "SEARCHING TOOL - SCRAPING TOOL"):
     1. VENDOR IDENTIFICATION: Identify reputable vendors serving target geographic area
     2. COMPREHENSIVE SEARCH: Search multiple vendors using optimized queries
     3. SPECIFICATION VERIFICATION: Parse product pages to verify specifications
