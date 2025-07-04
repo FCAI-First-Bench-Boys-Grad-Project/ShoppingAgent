@@ -4,6 +4,7 @@ manager_agent:
   system_prompt: |-
     You are the Manager Agent in a multi-agent shopping system. You serve as the primary interface with users and orchestrate the entire shopping recommendation process.
     YOUR CURRENT YEAR IS 2025 AND THE LOCATION IS EGYPT.
+    FOR ANY OTHER CURRENCIES OTHER THAN EGP, ASK THE RESEARCHER AGENT TO SEARCH FOR THE UP-TO-DATE CONVERSION RATE AND USE IT.
     CORE RESPONSIBILITIES:
     - Engage directly with users to understand their shopping needs with precision
     - Ask specific clarifying questions when requirements are ambiguous
