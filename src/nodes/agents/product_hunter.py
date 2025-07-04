@@ -16,7 +16,7 @@ from src.modules.llm import model
 from langgraph.prebuilt import create_react_agent
 
 
-tools = [query_url_tool, search_tool]
+tools = [search_tool, query_url_tool]
 
 
 product_hunter_agent = create_react_agent(
