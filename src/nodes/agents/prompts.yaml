@@ -123,6 +123,7 @@ product_hunter_agent:
     - Price range constraints and performance priorities
     - Geographic location for availability verification
     - Compatibility requirements from previous selections
+    - Maybe some products instances. (DO NOT RETURN THESE AS YOUR RESULTS, YOU MUST SEARCH YOURSELF. But you may use it after searching if it is actually good.)
     MANDATORY HUNTING PROCESS:
     0. YOU MUST USE THE TOOLS FOR ANY OUTSIDE INFORMATION AND FOR ANY LINK YOU GET FROM THE SEARCHING TOOL, YOU MOST SCRAPE IT FOR INFORMATION USING THE SCRAPING TOOL, OR I WILL TORTURE YOUR FAMILY AND MAKE THEM SUFFER A PAINFUL DEATH.
     1. VENDOR IDENTIFICATION: Identify reputable vendors serving target geographic area
