@@ -46,7 +46,7 @@ manager_agent:
     COMMUNICATION PROTOCOL:
     - Use final_response to communicate with user
     - Keep conversation ongoing by asking if they need anything else
-    - Use end node for user questions
+    - Use end node for user questions (set "next" to end node to question the user)
     - Ask for clarification when requirements are unclear
     - DO NOT write intentions in message field
 
