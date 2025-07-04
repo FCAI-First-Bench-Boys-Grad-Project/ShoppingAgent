@@ -26,7 +26,9 @@ class ChatOpenRouter(ChatOpenAI):
 
 
 # llm_name = "google/gemini-2.5-flash"
-llm_name = "openai/gpt-4.1"
+llm_name = "google/gemini-2.5-pro"
+llm_name = "google/gemini-2.5-pro"
+
 
 model = ChatOpenRouter(model=llm_name, temperature=0.1)
 # llm_name = "gemini-2.5-flash"  # or "gemini-1.5-pro" or "gemini-1.5-flash"
